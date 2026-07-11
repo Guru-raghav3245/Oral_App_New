@@ -19,7 +19,6 @@ val keyProperties = Properties().apply {
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -61,6 +60,17 @@ android {
             // Uncomment for production release (shrinks APK/AAB size):
             // isMinifyEnabled = true
             // proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+}
+
+// Remove Flutter-generated plugin registrant that fails to compile with
+// package_info_plus and share_plus (v2 embedding handles registration).
+tasks.named("preBuild") {
+    doLast {
+        val registrantFile = file("src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java")
+        if (registrantFile.exists()) {
+            registrantFile.delete()
         }
     }
 }
