@@ -26,6 +26,7 @@ plugins {
 android {
     namespace = "com.guru.oral_app_new"
     compileSdk = 36  // ← Changed: Required by plugins & AndroidX deps
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

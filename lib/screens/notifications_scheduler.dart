@@ -46,7 +46,7 @@ class _NotificationDemoState extends State<NotificationDemo> {
     );
 
     await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) {
         print('Notification tapped: ${notificationResponse.payload}');
@@ -105,11 +105,11 @@ class _NotificationDemoState extends State<NotificationDemo> {
 
     try {
       await flutterLocalNotificationsPlugin.zonedSchedule(
-        notificationId,
-        'Math Practice Time', // Updated title to match the context
-        motivationalMessage,
-        tzScheduledDate,
-        notificationDetails,
+        id: notificationId,
+        title: 'Math Practice Time', // Updated title to match the context
+        body: motivationalMessage,
+        scheduledDate: tzScheduledDate,
+        notificationDetails: notificationDetails,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         payload: 'daily_reminder_$notificationId',
         matchDateTimeComponents: DateTimeComponents.time,
@@ -488,7 +488,7 @@ class _NotificationDemoState extends State<NotificationDemo> {
                                       color: theme.colorScheme.error),
                                   onPressed: () async {
                                     await flutterLocalNotificationsPlugin
-                                        .cancel(notification.id);
+                                        .cancel(id: notification.id);
                                     await _loadPendingNotifications();
                                   },
                                 ),
